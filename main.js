@@ -43,28 +43,43 @@ function setBgGreet() {
         document.body.style.backgroundSize = "100% 100%";
         document.body.style.color = 'white';
     }
-}
+};
 
 // GET NAME 
 
 function getName() {
-    if(localStorage.getItem('name') === null) {
+    if(localStorage.getItem('name') === null || localStorage.getItem('name') === '') {
         name.textContent = '[Enter Name]';
     } else {
         name.textContent = localStorage.getItem('name');
+    }
+};
+
+// SET NAME
+
+function setName(e) {
+    if(e.type === 'keypress') {
+        if(e.which == 13 || e.keyCode == 13) {  // stops typing by button Enter
+            localStorage.setItem('name' , e.target.innerText);  // passed a key name and value
+            name.blur(); //delete focus from
+        }
+    } else {
+        localStorage.setItem('name' , e.target.innerText);
     }
 }
 
 // GET TASKS
 
 function getTasks() {
-    if(localStorage.getItem('tasks') === null) {
+    if(localStorage.getItem('tasks') === null || localStorage.getItem('tasks') === '') {
         tasks.textContent = '[Enter Tasks]';
     } else {
         tasks.textContent = localStorage.getItem('tasks');
     }
-}
+};
 
+name.addEventListener('keypress', setName);
+name.addEventListener('blur', setName);
 
 
 // RUN FUNCTION
