@@ -78,9 +78,24 @@ function getTasks() {
     }
 };
 
+// SET TASKS
+
+function setTasks(e) {
+    if(e.type === 'keypress') {
+        if(e.which == 13 || e.keyCode == 13) {  // stops typing by button Enter
+            localStorage.setItem('tasks' , e.target.innerText);  // passed a key name and value
+            tasks.blur(); //delete focus from
+        }
+    } else {
+        localStorage.setItem('tasks' , e.target.innerText);
+    }
+}
+
+// ADD EVENT
 name.addEventListener('keypress', setName);
 name.addEventListener('blur', setName);
-
+tasks.addEventListener('keypress', setTasks);
+tasks.addEventListener('blur', setTasks);
 
 // RUN FUNCTION
 
